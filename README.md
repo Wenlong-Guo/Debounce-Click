@@ -10,7 +10,7 @@ In your module `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'io.github.wenlong-guo:Debounce-Click:1.0.0'
+    implementation 'io.github.wenlong-guo:debounce-click:1.0.1'
 }
 ```
 
