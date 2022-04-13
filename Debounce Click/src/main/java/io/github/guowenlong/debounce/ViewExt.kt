@@ -19,14 +19,14 @@ const val TIME_TAG_KEY_TRIGGER_LAST = 1111111111
  */
 const val TIME_TAG_KEY_TRIGGER_DELAY = 1111111112
 
-var TRIGGER_DELAY_DEFAULT = 500L
+var TRIGGER_INTERVAL_DEFAULT = 500L
 
 
 /**
  * 带过滤的点击事件 默认500毫秒
  */
-fun View.setDebounceClickListener(time: Long = 500, block: (View) -> Unit) {
-    triggerDelay = time
+fun View.setDebounceClickListener(interval: Long = 500, block: (View) -> Unit) {
+    triggerInterval = interval
     setOnClickListener {
         if (clickEnable()) {
             block(it)
@@ -37,15 +37,15 @@ fun View.setDebounceClickListener(time: Long = 500, block: (View) -> Unit) {
 /**
  * 设置默认防抖时间间隔
  */
-fun setDebounceDefaultTriggerTimeMillis(timeMillis: Long) {
-    TRIGGER_DELAY_DEFAULT = timeMillis
+fun setTriggerDefaultInterval(timeMillis: Long) {
+    TRIGGER_INTERVAL_DEFAULT = timeMillis
 }
 
 /**
  * 自定义属性保存防抖时间间隔
  */
-private var View.triggerDelay: Long
-    get() = (getTag(TIME_TAG_KEY_TRIGGER_DELAY) as? Long) ?: TRIGGER_DELAY_DEFAULT
+private var View.triggerInterval: Long
+    get() = (getTag(TIME_TAG_KEY_TRIGGER_DELAY) as? Long) ?: TRIGGER_INTERVAL_DEFAULT
     set(value) {
         setTag(TIME_TAG_KEY_TRIGGER_DELAY, value)
     }
@@ -63,7 +63,7 @@ private var View.triggerLastTime: Long
  * 是否可以点击
  */
 private fun View.clickEnable(): Boolean {
-    val isEnable = System.currentTimeMillis() - triggerLastTime >= triggerDelay
+    val isEnable = System.currentTimeMillis() - triggerLastTime >= triggerInterval
     if (isEnable) triggerLastTime = System.currentTimeMillis()
     return isEnable
 }

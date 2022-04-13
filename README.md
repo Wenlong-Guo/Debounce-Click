@@ -10,24 +10,30 @@ In your module `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'io.github.wenlong-guo:debounce-click:1.0.1'
+    implementation 'io.github.wenlong-guo:debounce-click:1.0.2'
 }
 ```
 
 ## Usage
 
 #### For example:
+Use kotlin extension function ``setDebounceClickListener`` instead of ``setOnClickListener``
 
 ```kotlin
 findViewById(R.id.button).setDebounceClickListener {
     //something to click event
 }
+
+findViewById(R.id.button).setDebounceClickListener(2000) {
+    //something to click event
+}
 ```
 
-#### Optional , for example:
+#### Optional set duplicate clicks interval(millisecond), for example:
+if not set , the interval is 500 millisecond
 
 ```kotlin
-setDebounceDefaultTriggerTimeMillis(1000)
+setTriggerDefaultInterval(1000)
 ```
 License
 -------
